@@ -12,14 +12,8 @@ app.use(formidable());
 // mongoose.connect(process.env.MONGODB_URI);
 
 //mongoose.connect("mongodb://localhost/sixt");
-
-app.get("/", async (req, res) => {
-  try {
-    res.status(200).json("IN ROUTE");
-  } catch (error) {
-    res.status(400).json({ error: error.message });
-  }
-});
+const agenciesRoutes = require("./routes/agencies");
+app.use(agenciesRoutes);
 
 app.all("*", (req, res) => {
   res.status(404).json("Page not Found");
