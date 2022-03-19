@@ -15,6 +15,12 @@ app.use(formidable());
 const agenciesRoutes = require("./routes/agencies");
 app.use(agenciesRoutes);
 
+const offersRoutes = require("./routes/offers");
+app.use(offersRoutes);
+
+const rentalsRoutes = require("./routes/rentals");
+app.use(rentalsRoutes);
+
 app.all("*", (req, res) => {
   res.status(404).json("Page not Found");
 });
