@@ -60,7 +60,6 @@ router.post("/rental/new", async (req, res) => {
   }
 });
 
-// model.findOne().sort({ field: 'asc', _id: -1 }).limit(1)
 // READ
 // router.get("/rental/new", async (req, res) => {
 //   try {
