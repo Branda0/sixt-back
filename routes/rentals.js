@@ -53,6 +53,8 @@ router.post("/rental/new", async (req, res) => {
       },
       price: req.fields.totalPrice.toFixed(2),
       configuration: req.fields.configurationData,
+      offer: req.fields.offer,
+      extraFees: req.fields.extraFees.toFixed(2),
     });
     // const month = moment(req.fields.dateStart, "YYYY-MM-DD").format("MM");
     await newRental.save();

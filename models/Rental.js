@@ -26,6 +26,8 @@ const Rental = mongoose.model("Rental", {
   },
   price: Number,
   configuration: Object,
+  offer: Object,
+  extraFees: Number,
 });
 
 module.exports = Rental;
