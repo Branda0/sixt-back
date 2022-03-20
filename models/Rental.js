@@ -13,7 +13,10 @@ const Rental = mongoose.model("Rental", {
   date: {
     dateStart: String,
     dateEnd: String,
+    timeStart: String,
+    timeEnd: String,
     daysPaid: Number,
+    timeStart: String,
     monthID: String,
   },
   car: {

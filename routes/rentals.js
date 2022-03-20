@@ -2,7 +2,7 @@ const axios = require("axios");
 const express = require("express");
 const router = express.Router();
 const moment = require("moment");
-const Rental = require("../models/Rentals");
+const Rental = require("../models/Rental");
 
 // CREATE
 router.post("/rental/new", async (req, res) => {
@@ -40,6 +40,8 @@ router.post("/rental/new", async (req, res) => {
       date: {
         dateStart: req.fields.dateStart,
         dateEnd: req.fields.dateEnd,
+        timeStart: req.fields.timeStart.value,
+        timeEnd: req.fields.timeStart.value,
         daysPaid: req.fields.rentalDays,
         monthID: actualMonth,
       },
@@ -61,19 +63,21 @@ router.post("/rental/new", async (req, res) => {
 });
 
 // READ
-// router.get("/rental/new", async (req, res) => {
-//   try {
-//     console.log("in route");
-//     const response = await axios.post(
-//       `https://lereacteur-bootcamp-api.herokuapp.com/api/sixt/rentalconfigurations/create`,
-//       { offerId: req.query.offerId }
-//     );
-//     console.log(response.data);
+router.get("/rentals", async (req, res) => {
+  try {
+    console.log("in roufe");
 
-//     res.status(200).json(response.data);
-//   } catch (error) {
-//     res.status(400).json({ error: error.message });
-//   }
-// });
+    const rentals = await Rental.find();
+    console.log(rentals);
+    if (rentals) {
+      const count = await Rental.countDocuments();
+      res.status(200).json({ count: count, rentals: rentals });
+    } else {
+      res.status(404).json({ message: "no rentals on DB" });
+    }
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
 
 module.exports = router;
