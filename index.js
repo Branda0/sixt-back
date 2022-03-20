@@ -22,6 +22,9 @@ app.use(offersRoutes);
 const rentalsRoutes = require("./routes/rentals");
 app.use(rentalsRoutes);
 
+const backofficeRoutes = require("./routes/backoffice");
+app.use(backofficeRoutes);
+
 app.all("*", (req, res) => {
   res.status(404).json("Page not Found");
 });
