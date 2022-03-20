@@ -16,13 +16,10 @@ router.get("/offers", async (req, res) => {
 
 router.get("/offer/configurations", async (req, res) => {
   try {
-    console.log("in route");
     const response = await axios.post(
       `https://lereacteur-bootcamp-api.herokuapp.com/api/sixt/rentalconfigurations/create`,
       { offerId: req.query.offerId }
     );
-    console.log(response.data);
-
     res.status(200).json(response.data);
   } catch (error) {
     res.status(400).json({ error: error.message });
