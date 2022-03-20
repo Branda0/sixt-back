@@ -5,6 +5,7 @@ const moment = require("moment");
 const Rental = require("../models/Rental");
 
 // CREATE
+// Create a new rental object
 router.post("/rental/new", async (req, res) => {
   try {
     // If LastName length is < 3 add X char at the end for rental reference id creation
@@ -63,10 +64,9 @@ router.post("/rental/new", async (req, res) => {
 });
 
 // READ
+// Get all rentals from DB
 router.get("/rentals", async (req, res) => {
   try {
-    console.log("in roufe");
-
     const rentals = await Rental.find();
     console.log(rentals);
     if (rentals) {
@@ -74,6 +74,25 @@ router.get("/rentals", async (req, res) => {
       res.status(200).json({ count: count, rentals: rentals });
     } else {
       res.status(404).json({ message: "no rentals on DB" });
+    }
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
+
+// DELETE
+// Delete rental by it's _id from from database // query params : id
+router.delete("/rental/delete", async (req, res) => {
+  try {
+    if (req.query.id) {
+      const rentalToDelete = await Rental.findByIdAndDelete(req.query.id);
+      if (rentalToDelete) {
+        res.status(200).json(rentalToDelete);
+      } else {
+        res.status(404).json({ message: "no rentals on DB" });
+      }
+    } else {
+      res.status(401).json({ message: "missing id param" });
     }
   } catch (error) {
     res.status(400).json({ error: error.message });
