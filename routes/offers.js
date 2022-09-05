@@ -5,7 +5,13 @@ const router = express.Router();
 router.get("/offers", async (req, res) => {
   try {
     const response = await axios.get(
-      `https://lereacteur-bootcamp-api.herokuapp.com/api/sixt/rentaloffers?pickupStation=${req.query.agencyId}&returnStation=${req.query.agencyId}&pickupDate=${req.query.startDate}&returnDate=${req.query.endDate}`
+      `https://lereacteur-bootcamp-api.herokuapp.com/api/sixt/rentaloffers?pickupStation=${req.query.agencyId}&returnStation=${req.query.agencyId}&pickupDate=${req.query.startDate}&returnDate=${req.query.endDate}`,
+      {
+        headers: {
+          authorization: `Bearer ${process.env.SIXT_API_KEY}`,
+          // "content-Type": "multipart/form-data",
+        },
+      }
     );
 
     res.status(200).json(response.data);
@@ -18,7 +24,12 @@ router.get("/offer/configurations", async (req, res) => {
   try {
     const response = await axios.post(
       `https://lereacteur-bootcamp-api.herokuapp.com/api/sixt/rentalconfigurations/create`,
-      { offerId: req.query.offerId }
+      { offerId: req.query.offerId },
+      {
+        headers: {
+          authorization: `Bearer ${process.env.SIXT_API_KEY}`,
+        },
+      }
     );
     res.status(200).json(response.data);
   } catch (error) {

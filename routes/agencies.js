@@ -7,7 +7,10 @@ router.get("/agencies", async (req, res) => {
     if (req.query.term.length < 3) return res.status(401).json({ error: "term length too short" });
 
     const response = await axios.get(
-      `https://lereacteur-bootcamp-api.herokuapp.com/api/sixt/locations?term=${req.query.term}`
+      `https://lereacteur-bootcamp-api.herokuapp.com/api/sixt/locations?term=${req.query.term}`,
+      {
+        headers: { authorization: `Bearer ${process.env.SIXT_API_KEY}` },
+      }
     );
 
     res.status(200).json(response.data);

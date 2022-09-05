@@ -83,7 +83,7 @@ router.get("/rentals", async (req, res) => {
 });
 
 // DELETE
-// Delete rental by it's _id from from database // query params : id
+// Delete rental by its _id from from database // query params : id
 router.delete("/rental/delete", async (req, res) => {
   try {
     if (req.query.id) {
