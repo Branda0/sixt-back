@@ -9,7 +9,6 @@ router.get("/offers", async (req, res) => {
       {
         headers: {
           authorization: `Bearer ${process.env.SIXT_API_KEY}`,
-          // "content-Type": "multipart/form-data",
         },
       }
     );
